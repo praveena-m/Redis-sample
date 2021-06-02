@@ -32,7 +32,7 @@ namespace Company.Core.Services
 			var myData = await _redisService.GetAsync<MyDataModel>(Rediskeys.MyData).ConfigureAwait(false);
 			if (myData == null)
 			{
-				openPeriod = new OpenPeriod();
+				
 
 				// Get my data from database.
 				myData = await _databaseRepository.GetSingleAsync<MyDataModel>().ConfigureAwait(false);
