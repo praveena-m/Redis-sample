@@ -26,10 +26,12 @@ namespace Company.Core.Services
 			_redisService = redisService;
 		}
 		
-		public async Task<MyDataModel> GetMyDataAsync()
+		public async Task<MyDataModel> GetMyDataAsync(string clientId)
 		{
+			var rediKey = $"{Rediskeys.CompanyInfo}_{clientId}";
+		
 			// Check if mydata is present in Redis.
-			var myData = await _redisService.GetAsync<MyDataModel>(Rediskeys.MyData).ConfigureAwait(false);
+			var myData = await _redisService.GetAsync<MyDataModel>(rediKey).ConfigureAwait(false);
 			if (myData == null)
 			{
 				
@@ -39,7 +41,7 @@ namespace Company.Core.Services
 
 
 				// Set my data in Redis.
-				await _redisService.SetAsync(Rediskeys.MyData, myData).ConfigureAwait(false);
+				await _redisService.SetAsync(rediKey, myData).ConfigureAwait(false);
 			}
 			return myData;
 		}
