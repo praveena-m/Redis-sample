@@ -10,6 +10,6 @@ namespace Company.Core.Interfaces
 {
 	public interface ITestService
 	{
-		Task<MyDataModel> GetMyDataAsync();
+		Task<MyDataModel> GetMyDataAsync(string clientId);
 	}
 }
